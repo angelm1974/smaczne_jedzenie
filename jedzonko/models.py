@@ -16,8 +16,9 @@ class Producent(models.Model):
 
 
 class Surowiec(models.Model):
+    wybor = [('napoje', 'napoje'),('warzywa', 'warzywa'),('owoce', 'owoce'), ('mięso', 'mięso'), ('nabiał', 'nabiał'), ('pieczywo', 'pieczywo'),]
     nazwa = models.CharField(max_length=64)
-    kategoria = models.Choices('nabiał', 'mięso', 'warzywa', 'owoce', )
+    kategoria = models.CharField(max_length=64, choices=wybor, default='posiłki')
     cena = models.DecimalField(max_digits=5, decimal_places=2)
     jednostka = models.CharField(max_length=64)
     producent = models.ForeignKey(Producent, on_delete=models.CASCADE)

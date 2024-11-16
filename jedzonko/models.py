@@ -47,3 +47,5 @@ class Produkt(models.Model):
 
     def __str__(self):
         return self.nazwa
+
+class 

@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 # Create your models here.
@@ -48,4 +49,19 @@ class Produkt(models.Model):
     def __str__(self):
         return self.nazwa
 
-class 
+class Recenzja(models.Model):
+    ocena = models.IntegerField()
+    opis = models.TextField()
+    data_wpisu = models.DateTimeField(auto_now_add=True)
+    produkt = models.ForeignKey(Produkt, on_delete=models.CASCADE)
+    autor = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def pseudonim(self):
+        return self.autor.first_name
+    
+    class Meta:
+        verbose_name = 'Recenzja'
+        verbose_name_plural = 'Recenzje'
+    
+    def __str__(self):
+        return self.autor.first_name + ' ' + self.produkt.nazwa
